@@ -1,4 +1,4 @@
-PORT="11211"
+PORT="11212"
 USER="memcached"
 MAXCONN="96"
 CACHESIZE="32"
