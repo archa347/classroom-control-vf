@@ -53,8 +53,9 @@ node default {
   }
 
   host { 'testing.puppetlabs.vm':
-    ensure => present,
-    ip     => '127.0.0.1',
-    target => '/etc/hosts',
+    ensure  => present,
+    ip      => '127.0.0.1',
+    target  => '/etc/hosts',
+    comment => 'added for homework 7.3',
   }
 }
