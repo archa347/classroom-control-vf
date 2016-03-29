@@ -9,7 +9,7 @@ class memcached {
     require => Package['memcached'],
   }
 
-  servcie { 'memcached':
+  service { 'memcached':
     ensure    => running,
     subscribe => File['/etc/sysconfig/memcached'],
   }
