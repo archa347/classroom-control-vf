@@ -14,11 +14,14 @@ class nginx {
     source  => 'puppet:///modules/nginx/default.conf',
     require => Package['nginx'],
   }
+  file { '/var/www':
+    ensure => directory,
+  }
   file { 'index.html':
     path    => '/var/www/index.html',
     ensure  => present,
     source  => 'puppet:///modules/nginx/index.html',
-    require => Package['nginx'],
+    require => [Package['nginx'],File['/var/www']],
   }
   service { 'nginx':
     ensure    => running,
