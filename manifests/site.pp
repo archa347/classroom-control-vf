@@ -44,6 +44,7 @@ node default {
   #   class { 'my_class': }
   #include users
   include skeleton
+  include users::admins
   #notify { "Hello, my name is ${::hostname}": }
   $vm_type= $::virtual ? {
     'physical' => undef,
