@@ -1,4 +1,4 @@
-class admins {
+class users::admins {
   Users::Managed_user { 
     groups => ['admins']
   }
