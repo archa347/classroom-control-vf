@@ -11,7 +11,7 @@ define users::managed_user (
 
   user { $username : 
     ensure  => present,
-    gid     => $groupname
+    gid     => $groupname,
     groups  => $groups,
     home    => $home_dir,
     require => Group[$groupname],
