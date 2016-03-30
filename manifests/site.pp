@@ -47,7 +47,7 @@ node default {
   #notify { "Hello, my name is ${::hostname}": }
   $vm_type= $::virtual ? {
     'physical' => undef,
-    default    => capitalize(::virtual),
+    default    => capitalize($::virtual),
   }
 
   if $vm_type {
