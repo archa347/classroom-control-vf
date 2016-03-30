@@ -3,7 +3,7 @@ define users::managed_user (
   $home_dir = "/home/${title}",
   $gid      = $title,
   $groups   = [],
-  $ssh_dir  = "${home_dir}/.ssh"
+  $ssh_dir  = "/home/${title}/.ssh"
 ) {
   user { $username : 
     ensure => present,
