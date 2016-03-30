@@ -9,24 +9,26 @@ class nginx {
   $default_conf='/etc/nginx/conf.d/default.conf'
   $root_dir='/var/www'
   $index="${root_dir}/index.html"
+  $file_source='puppet:///modules/nginx'
+
 
   package { 'nginx':
     ensure => present,
   }
   file { $nginx_conf:
-    source  => 'puppet:///modules/nginx/nginx.conf',
+    source  => "${file_source}/nginx.conf",
     require => Package['nginx'],
   }
   file { $default_conf:
-    source  => 'puppet:///modules/nginx/default.conf',
+    source  => "${file_source}/default.conf",
     require => Package['nginx'],
   }
   file { $root_dir:
     ensure => directory,
   }
   file { $index:
-    source  => 'puppet:///modules/nginx/index.html',
-    require => [Package['nginx'],File['/var/www']],
+    source  => "${file_source}/index.html",
+    require => [Package['nginx'],File[$root_dir]],
   }
   service { 'nginx':
     ensure    => running,
