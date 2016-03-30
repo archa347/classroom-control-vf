@@ -44,7 +44,16 @@ node default {
   #   class { 'my_class': }
   #include users
   include skeleton
-  notify { "Hello, my name is ${::hostname}": }
+  #notify { "Hello, my name is ${::hostname}": }
+  $vm_type= $::virtual ? {
+    'physical' => undef,
+    default    => capitalize(::virtual),
+  }
+
+  if $vm_type {
+    $vm_notification= "This agent is running as a ${vm_type} VM"
+    notify { $vm_notification :}
+  }
 
   file { '/etc/motd':
     ensure  => file,
