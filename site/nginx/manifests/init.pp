@@ -2,7 +2,7 @@ class nginx (
       $package_name=$nginx::params::package_name,
       $nginx_user=$nginx::params::nginx_user,
       $config=$nginx::params::config,
-      $server_block=$nginx::params::config,
+      $server_block=$nginx::params::server_block,
       $root=$nginx::params::root,
       $log=$nginx::params::log,
       $file_source=$nginx::params::file_source,
