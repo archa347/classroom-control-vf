@@ -1,14 +1,41 @@
 class nginx {
-  File {
-    ensure => present,
-    owner  => 'root',
-    mode   => '0664',
+  case $::osfamily {
+    'redhat','debian': {
+      File {
+        ensure => present,
+        owner  => 'root',
+        mode   => '0664',
+      }
+      $package_name='nginx'
+      $nginx_user='nginx'
+      $config_dir='/etc/nginx/'
+      $nginx_conf="${config_dir}nginx.conf"
+      $server_block_dir="${config_dir}conf.d/"
+      $default_conf="${server_block_dir}default.conf"
+      $root_dir='/var/www'
+      $index="${root_dir}/index.html"
+      $log_dir='/var/log/nginx/'
+      $error_log="${log_dir}error.log"
+    }
+    'windows' : {
+      File {
+        ensure => present,
+        owner  => 'Administrator',
+        mode   => '0664',
+      }
+      $package_name='nginx-service'
+      $nginx_user='nobody'
+      $config_dir='C:/ProgramData/nginx/'
+      $nginx_conf="${config_dir}nginx.conf"
+      $server_block_dir="${config_dir}conf.d/"
+      $default_conf="${server_block_dir}default.conf"
+      $root_dir='C:/ProgramData/nginx/html'
+      $index="${root_dir}/index.html"
+      $log_dir='C:/ProgramData/nginx/logs/'
+      $error_log="${log_dir}error.log"
+    }
   }
 
-  $nginx_conf='/etc/nginx/nginx.conf'
-  $default_conf='/etc/nginx/conf.d/default.conf'
-  $root_dir='/var/www'
-  $index="${root_dir}/index.html"
   $file_source='puppet:///modules/nginx'
 
 
