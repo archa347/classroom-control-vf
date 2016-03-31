@@ -43,11 +43,13 @@ class nginx {
     ensure => present,
   }
   file { $nginx_conf:
-    source  => "${file_source}/nginx.conf",
+    #source => "${file_source}/nginx.conf",
+    content => template('nginx/nginx.conf.erb'),
     require => Package['nginx'],
   }
   file { $default_conf:
-    source  => "${file_source}/default.conf",
+    #source  => "${file_source}/default.conf",
+    content => template('nginx/default.conf.erb'),
     require => Package['nginx'],
   }
   file { $root_dir:
