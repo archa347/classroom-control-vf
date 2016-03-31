@@ -17,7 +17,7 @@ class nginx (
       $nginx_conf="${config_dir}nginx.conf"
       $server_block_dir="${config_dir}conf.d/"
       $default_conf="${server_block_dir}default.conf"
-      $root_dir='/var/www'
+      #$root_dir='/var/www'
       $index="${root_dir}/index.html"
       $log_dir='/var/log/nginx/'
       $error_log="${log_dir}error.log"
@@ -34,7 +34,7 @@ class nginx (
       $nginx_conf="${config_dir}nginx.conf"
       $server_block_dir="${config_dir}conf.d/"
       $default_conf="${server_block_dir}default.conf"
-      $root_dir='C:/ProgramData/nginx/html'
+      #$root_dir='C:/ProgramData/nginx/html'
       $index="${root_dir}/index.html"
       $log_dir='C:/ProgramData/nginx/logs/'
       $error_log="${log_dir}error.log"
