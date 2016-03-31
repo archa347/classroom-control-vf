@@ -21,7 +21,7 @@ class profile::wordpress {
 
   user { 'wordpress':
     ensure  => present,
-    gid     => 'wordpress'
+    gid     => 'wordpress',
     require => Group['wordpress']
   }
 
