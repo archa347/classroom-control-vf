@@ -27,6 +27,7 @@ class nginx (
   $error_log= "${log}/error.log"
   $nginx_conf= "${config}/nginx.conf"
   $default_conf= "${server_block}/default.conf"
+  $index="${root}/index.html"
 
   package { 'nginx':
     name   => $package_name,
