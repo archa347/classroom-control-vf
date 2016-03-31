@@ -1,4 +1,6 @@
-class nginx {
+class nginx (
+  $root_dir='/var/www'
+) {
   case $::osfamily {
     'redhat','debian': {
       File {
