@@ -7,7 +7,10 @@ class nginx {
         mode   => '0664',
       }
       $package_name='nginx'
-      $nginx_user='nginx'
+      $nginx_user= $::osfamily ? {
+        'redhat'=> 'nginx',
+        'debian'=> 'www-data',
+      }
       $config_dir='/etc/nginx/'
       $nginx_conf="${config_dir}nginx.conf"
       $server_block_dir="${config_dir}conf.d/"
@@ -39,7 +42,7 @@ class nginx {
   $file_source='puppet:///modules/nginx'
 
 
-  package { 'nginx':
+  package { $package_name:
     ensure => present,
   }
   file { $nginx_conf:
