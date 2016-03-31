@@ -3,7 +3,12 @@ class profile::wordpress {
   include '::mysql::server'
 
   ## Wordpress config
-
+  class { 'wordpress':
+    wp_owner     => 'wordpress',
+    wp_group     => 'wordpress',
+    db_user      => 'wordpress',
+    #db_password => managed by hiera
+  }
   ## Apache vhost config
   class { 'apache':
     default_vhost => false,
