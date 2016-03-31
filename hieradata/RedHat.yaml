@@ -1,1 +1,2 @@
 message: "Welcome to Redhat"
+nginx::docroot: "/var/www/training"
