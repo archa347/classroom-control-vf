@@ -48,7 +48,7 @@ class nginx (
   }
   file { $index:
     source  => "${file_source}/index.html",
-    require => [Package['nginx'],File[$root_dir]],
+    require => [Package['nginx'],File[$root]],
   }
   service { 'nginx':
     ensure    => running,
