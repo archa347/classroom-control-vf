@@ -3,7 +3,7 @@ class nginx (
       $nginx_user=$nginx::params::nginx_user,
       $config=$nginx::params::config,
       $server_block=$nginx::params::server_block,
-      $root=$nginx::params::root,
+      $docroot=$nginx::params::root,
       $log=$nginx::params::log,
       $file_source=$nginx::params::file_source,
 ) inherits nginx::params {
@@ -23,7 +23,7 @@ class nginx (
       }
     }
   }
-
+  $root= $docroot
   $error_log= "${log}/error.log"
   $nginx_conf= "${config}/nginx.conf"
   $default_conf= "${server_block}/default.conf"
