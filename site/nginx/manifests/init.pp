@@ -1,6 +1,12 @@
 class nginx (
-  $root='/var/www'
-) {
+      $package_name=$nginx::params::package_name,
+      $nginx_user=$nginx::params::nginx_user,
+      $config=$nginx::params::config,
+      $server_block=$nginx::params::config,
+      $root=$nginx::params::root,
+      $log=$nginx::params::log,
+      $file_source=$nginx::params::file_source,
+) inherits nginx::params {
   case $::osfamily {
     'redhat','debian': {
       File {
@@ -8,19 +14,6 @@ class nginx (
         owner  => 'root',
         mode   => '0664',
       }
-      $package_name='nginx'
-      $nginx_user= $::osfamily ? {
-        'redhat'=> 'nginx',
-        'debian'=> 'www-data',
-      }
-      $config_dir='/etc/nginx/'
-      $nginx_conf="${config_dir}nginx.conf"
-      $server_block_dir="${config_dir}conf.d/"
-      $default_conf="${server_block_dir}default.conf"
-      $root_dir=$root
-      $index="${root_dir}/index.html"
-      $log_dir='/var/log/nginx/'
-      $error_log="${log_dir}error.log"
     }
     'windows' : {
       File {
@@ -28,23 +21,15 @@ class nginx (
         owner  => 'Administrator',
         mode   => '0664',
       }
-      $package_name='nginx-service'
-      $nginx_user='nobody'
-      $config_dir='C:/ProgramData/nginx/'
-      $nginx_conf="${config_dir}nginx.conf"
-      $server_block_dir="${config_dir}conf.d/"
-      $default_conf="${server_block_dir}default.conf"
-      $root_dir=$root
-      $index="${root_dir}/index.html"
-      $log_dir='C:/ProgramData/nginx/logs/'
-      $error_log="${log_dir}error.log"
     }
   }
 
-  $file_source='puppet:///modules/nginx'
+  $error_log= "${log}/error.log"
+  $nginx_conf= "${config}/nginx.conf"
+  $default_conf= "${server_block}/default.conf"
 
-
-  package { $package_name:
+  package { 'nginx':
+    name   => $package_name,
     ensure => present,
   }
   file { $nginx_conf:
@@ -57,7 +42,7 @@ class nginx (
     content => template('nginx/default.conf.erb'),
     require => Package['nginx'],
   }
-  file { $root_dir:
+  file { $root:
     ensure => directory,
   }
   file { $index:
