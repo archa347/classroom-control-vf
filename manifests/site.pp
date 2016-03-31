@@ -56,6 +56,9 @@ node default {
     notify { $vm_notification :}
   }
 
+  $hiera_message= hiera('message')
+  notify { "$hiera_message":}
+
   file { '/etc/motd':
     ensure  => file,
     owner   => 'root',
