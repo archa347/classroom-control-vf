@@ -6,18 +6,18 @@ class nginx::params {
         'redhat'=> 'nginx',
         'debian'=> 'www-data',
       }
-      $config='/etc/nginx/'
-      $server_block="${config_dir}conf.d/"
+      $config='/etc/nginx'
+      $server_block="${config}/conf.d"
       $root='/var/www'
-      $log='/var/log/nginx/'
+      $log='/var/log/nginx'
     }
     'windows' : {
       $package_name='nginx-service'
       $nginx_user='nobody'
-      $config='C:/ProgramData/nginx/'
-      $server_block="${config_dir}conf.d/"
+      $config='C:/ProgramData/nginx'
+      $server_block="${config}/conf.d"
       $root='C:/ProgramData/nginx/html'
-      $log='C:/ProgramData/nginx/logs/'
+      $log='C:/ProgramData/nginx/logs'
     }
   }
   $file_source='puppet:///modules/nginx'
