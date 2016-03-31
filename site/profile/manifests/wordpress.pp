@@ -22,7 +22,7 @@ class profile::wordpress {
   user { 'wordpress':
     ensure  => present,
     gid     => 'wordpress',
-    require => Group['wordpress']
+    require => Group['wordpress'],
   }
 
 
@@ -34,5 +34,4 @@ class profile::wordpress {
     comment => 'added via wordpress profile',
     ensure  => 'present',
   }
-                        }
 }
