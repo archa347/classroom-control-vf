@@ -3,7 +3,7 @@ class profile::wordpress {
   include '::mysql::server'
 
   ## Wordpress config
-  class { 'wordpress':
+  class { '::wordpress':
     wp_owner     => 'wordpress',
     wp_group     => 'wordpress',
     db_user      => 'wordpress',
