@@ -8,6 +8,7 @@ class profile::wordpress {
     wp_group     => 'wordpress',
     db_user      => 'wordpress',
     #db_password => managed by hiera
+    install_dir  => '/var/www/wordpress',
   }
   ## Apache vhost config
   class { 'apache':
